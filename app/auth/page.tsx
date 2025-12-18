@@ -1,12 +1,28 @@
 'use client';
 
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '@/config/firebase';
 import { signInWithGoogle } from '@/lib/auth';
 import { Sprout } from 'lucide-react';
 
 export default function AuthPage() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        router.replace('/');
+      }
+    });
+    return () => unsub();
+  }, [router]);
+
   const handleGoogleSignIn = async () => {
     try {
       await signInWithGoogle();
+      router.push('/');
     } catch (error) {
       console.error('Sign-in failed:', error);
     }
