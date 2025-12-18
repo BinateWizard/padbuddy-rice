@@ -24,14 +24,14 @@ export default function MainPage() {
 
   if (!user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="min-h-screen flex items-center justify-center">
         <h2 className="text-2xl text-gray-700">Please sign in first</h2>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4">
       <div className="bg-white rounded-xl shadow-xl p-8 flex flex-col items-center gap-4">
         <img
           src={user.photoURL || "/default-avatar.png"}
